@@ -1,7 +1,7 @@
 # Ontology API Search
 
-- deploy with `docker compose up`
-- exec into the container with `docker compose exec -it backend /bin/bash`
+- deploy with `docker-compose up`
+- exec into the container with `docker-compose exec -it backend /bin/bash`
 - import FoodOn into the database with `python manage.py ingest https://raw.githubusercontent.com/FoodOntology/foodon/master/foodon.owl`
 - Be patient. The ontology will quickly be downloaded, then slowly parsed. Finally, its content will be ingested and indexed into the database.
 

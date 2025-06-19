@@ -1,5 +1,6 @@
-from apps.ontologies import models
 from rest_framework import serializers
+
+from apps.ontologies import models
 
 
 class OntologySerializer(serializers.ModelSerializer):

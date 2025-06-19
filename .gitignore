@@ -1,5 +1,6 @@
 # project-specific
 .env
+local.env
 static/admin/
 static/rest_framework/
 static/staticfiles.json

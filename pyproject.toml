@@ -2,7 +2,7 @@
 name = "ontology-search"
 version = "0.1.0"
 description = ""
-authors = [{ name = "Olivier Banville", email = "olivier@banville.net" }]
+authors = [{ name = "Olivier Banville", email = "olivier@banville.net" }, { name = "Steven Mugisha Mizero", email = "smugisha@uoguelph.ca" }]
 readme = "README.md"
 requires-python = "^3.10"
 
@@ -24,6 +24,7 @@ pytest-django = "^4.10.0"
 whitenoise = "^6.9.0"
 rdflib = "^7.1.4"
 requests = "^2.32.4"
+python-dotenv = "^1.1.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"

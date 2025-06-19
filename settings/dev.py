@@ -1,3 +1,5 @@
+print("we  might actually be in dev wagwan")
+
 from .base import *  # noqa: F403, F401
 import os
 from corsheaders.defaults import default_headers

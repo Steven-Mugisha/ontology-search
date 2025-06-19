@@ -1,6 +1,12 @@
-from .base import *  # noqa: F403, F401
 import os
+
 from corsheaders.defaults import default_headers
+from dotenv import load_dotenv
+
+from .base import *  # noqa: F403, F401
+
+# load_dotenv(".env")
+# load_dotenv("local.env", override=True)
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
 ALLOWED_HOSTS = ["*"]
@@ -17,14 +23,16 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_PREFLIGHT_MAX_AGE = 0  # remove or set higher for production
 CORS_ALLOW_HEADERS = (*default_headers,)
 
+
 db_options = {}
 if os.environ.get("POSTGRES_SCHEMA"):
     db_options = {"options": f"-c search_path={os.environ.get('POSTGRES_SCHEMA')}"}
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "OPTIONS": db_options,
+        # "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
+        # "OPTIONS": db_options,
         "NAME": os.environ.get("POSTGRES_DB"),
         "USER": os.environ.get("POSTGRES_USER"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),

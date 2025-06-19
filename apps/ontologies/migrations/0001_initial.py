@@ -9,39 +9,62 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Ontology',
+            name="Ontology",
             fields=[
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('weight', models.FloatField(blank=True, default=1.0, null=True)),
-                ('uri', models.URLField(primary_key=True, serialize=False)),
-                ('label', models.CharField(blank=True, max_length=255, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("weight", models.FloatField(blank=True, default=1.0, null=True)),  # type: ignore
+                ("uri", models.URLField(primary_key=True, serialize=False)),
+                ("label", models.CharField(blank=True, max_length=255, null=True)),
             ],
             options={
-                'verbose_name_plural': 'Ontologies',
+                "verbose_name_plural": "Ontologies",
             },
         ),
         migrations.CreateModel(
-            name='Term',
+            name="Term",
             fields=[
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('uri', models.URLField(primary_key=True, serialize=False)),
-                ('label', models.CharField(blank=True, max_length=255, null=True)),
-                ('definition', models.TextField(blank=True, null=True)),
-                ('subClassOf', django.contrib.postgres.fields.ArrayField(base_field=models.URLField(), blank=True, default=list, help_text='List of URIs for parent classes (subClassOf relationships)', null=True, size=None)),
-                ('weight', models.FloatField(blank=True, default=1.0, null=True)),
-                ('is_favorite', models.BooleanField(default=False)),
-                ('ontology', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='terms', to='ontologies.ontology')),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("uri", models.URLField(primary_key=True, serialize=False)),
+                ("label", models.CharField(blank=True, max_length=255, null=True)),
+                ("definition", models.TextField(blank=True, null=True)),
+                (
+                    "subClassOf",
+                    django.contrib.postgres.fields.ArrayField(
+                        base_field=models.URLField(),
+                        blank=True,
+                        default=list,
+                        help_text="List of URIs for parent classes (subClassOf relationships)",
+                        null=True,
+                        size=None,
+                    ),
+                ),
+                ("weight", models.FloatField(blank=True, default=1.0, null=True)),  # type: ignore
+                ("is_favorite", models.BooleanField(default=False)),  # type: ignore
+                (
+                    "ontology",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="terms",
+                        to="ontologies.ontology",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Terms',
-                'indexes': [models.Index(fields=['uri'], name='ontologies__uri_809f49_idx'), models.Index(fields=['ontology'], name='ontologies__ontolog_487a8b_idx')],
+                "verbose_name_plural": "Terms",
+                "indexes": [
+                    models.Index(fields=["uri"], name="ontologies__uri_809f49_idx"),
+                    models.Index(
+                        fields=["ontology"], name="ontologies__ontolog_487a8b_idx"
+                    ),
+                ],
             },
         ),
     ]

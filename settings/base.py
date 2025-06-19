@@ -1,8 +1,15 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv(".env")
+load_dotenv("local.env", override=True)
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+
 DEBUG = False
 
 DJANGO_APPS = [
@@ -18,10 +25,12 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "drf_spectacular",
 ]
+
 LOCAL_APPS = [
     "apps.ontologies",
     "apps.api",
 ]
+
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
@@ -86,4 +95,13 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "",
     "VERSION": "0.1.0",
     "SERVE_INCLUDE_SCHEMA": False,
+}
+
+# Django REST Framework settings
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
 }

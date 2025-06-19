@@ -1,8 +1,9 @@
-from django.core.management.base import BaseCommand, CommandError
-from apps.ontologies.models import Ontology, Term
-from rdflib import Graph, URIRef
-from rdflib.namespace import OWL, RDF, DCTERMS, RDFS
 import requests
+from django.core.management.base import BaseCommand, CommandError
+from rdflib import Graph, URIRef
+from rdflib.namespace import DCTERMS, OWL, RDF, RDFS
+
+from apps.ontologies.models import Ontology, Term
 
 
 def load_owl_from_url(url: str):
@@ -21,6 +22,7 @@ def parse_ontology(text_data: str, format="application/rdf+xml"):
 
 
 def create_ontologies(graph: Graph):
+
     result = []
     for subject in graph.subjects(RDF.type, OWL.Ontology):
         uri = str(subject)
@@ -33,6 +35,7 @@ def create_ontologies(graph: Graph):
         ontology, created = Ontology.objects.get_or_create(
             uri=uri, defaults={"label": label}
         )
+
         if created:
             print(f"Created ontology: {ontology.label} ({ontology.uri})")
         else:

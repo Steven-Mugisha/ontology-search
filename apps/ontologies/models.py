@@ -1,12 +1,23 @@
-from django.db import models
+from typing import Any
+
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
+from django.db.models import Value
+from django.db.models.fields import NOT_PROVIDED
+from django.db.models.manager import Manager
+
+
+def default_weight():
+    return 1.0
 
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    weight = models.FloatField(default=1.0, blank=True, null=True)
+    weight = models.FloatField(default=1.0, blank=True, null=True)  # type: ignore
+
+    objects: Manager = models.Manager()
 
     class Meta:
         abstract = True
@@ -50,8 +61,8 @@ class Term(BaseModel):
         help_text="List of URIs for parent classes (subClassOf relationships)",
     )
 
-    weight = models.FloatField(default=1.0, blank=True, null=True)
-    is_favorite = models.BooleanField(default=False)
+    weight = models.FloatField(default=1.0, blank=True, null=True)  # type: ignore
+    is_favorite = models.BooleanField(default=False)  # type: ignore
 
     def __str__(self):
         return self.label or self.uri
